@@ -1,0 +1,3 @@
+const API=import.meta.env.VITE_API_URL||'';
+export async function api(path,opts={}){const token=localStorage.getItem('evently_token');const res=await fetch(`${API}/api${path}`,{headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{})},...opts});const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(data.message||'Something went wrong');return data}
+export {API};
